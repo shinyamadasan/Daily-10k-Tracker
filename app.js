@@ -182,11 +182,43 @@ if (!localStorage.getItem('stepsData')) {
 
             return `
                 <tr>
-                    <td>${this.formatDate(submission.date)}</td>
-                    <td>${submission.name}</td>
-                    <td>${submission.steps.toLocaleString()}</td>
-                    <td><span class="${statusClass}">${status}</span></td>
-                    <td class="amount-owed ${amountClass}">₱${amountOwed}</td>
+                  // Edit submission function
+editSubmission(id) {
+    const submission = this.submissions.find(s => s.id === id);
+    if (!submission) return;
+    
+    const newSteps = prompt(`Edit steps for ${submission.name} on ${submission.date}:`, submission.steps);
+    if (newSteps === null) return; // User cancelled
+    
+    const steps = parseInt(newSteps);
+    if (isNaN(steps) || steps < 0) {
+        alert('Please enter a valid number of steps');
+        return;
+    }
+    
+    submission.steps = steps;
+    this.saveData();
+    this.renderAllData();
+    alert(`✅ Updated ${submission.name}'s steps to ${steps.toLocaleString()}`);
+}
+
+// Delete submission function  
+deleteSubmission(id) {
+    const submission = this.submissions.find(s => s.id === id);
+    if (!submission) return;
+    
+    if (confirm(`Delete ${submission.name}'s entry for ${submission.date}?\n\nSteps: ${submission.steps.toLocaleString()}\n\nThis cannot be undone!`)) {
+        this.submissions = this.submissions.filter(s => s.id !== id);
+        this.saveData();
+        this.renderAllData();
+        alert('✅ Entry deleted successfully');
+    }
+}
+
+// Global functions for onclick handlers
+window.editSubmission = (id) => window.stepsTracker.editSubmission(id);
+window.deleteSubmission = (id) => window.stepsTracker.deleteSubmission(id);
+
                 </tr>
             `;
         }).join('');
