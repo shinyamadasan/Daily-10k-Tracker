@@ -1,7 +1,7 @@
 // 10K Steps Challenge Tracker Application
 class StepsTracker {
     constructor() {
-        this.participants = ['Juan', 'Maria', 'Carlos', 'Ana', 'Luis'];
+        this.participants = ['Del', 'Giem', 'Glaiz', 'Jeun', 'Joy', 'Kokoy', 'Leanne', 'Lui', 'Ramon', 'Robert', 'Sarah', 'Sheila', 'Shin', 'Yohan', 'Zephanny', 'Sam'];
         this.submissions = [];
         this.targetSteps = 10000;
         this.penaltyAmount = 50;
@@ -25,24 +25,17 @@ class StepsTracker {
     }
 
     loadSampleData() {
-        const sampleData = [
-            {id: 1, name: "Juan", date: "2024-09-28", steps: 12500, proofUrl: null, paid: false},
-            {id: 2, name: "Maria", date: "2024-09-28", steps: 8900, proofUrl: null, paid: false},
-            {id: 3, name: "Carlos", date: "2024-09-28", steps: 11200, proofUrl: null, paid: false},
-            {id: 4, name: "Juan", date: "2024-09-29", steps: 9800, proofUrl: null, paid: false},
-            {id: 5, name: "Ana", date: "2024-09-29", steps: 13400, proofUrl: null, paid: false},
-            {id: 6, name: "Luis", date: "2024-09-29", steps: 7600, proofUrl: null, paid: false},
-            {id: 7, name: "Maria", date: "2024-09-30", steps: 10800, proofUrl: null, paid: false},
-            {id: 8, name: "Carlos", date: "2024-09-30", steps: 9200, proofUrl: null, paid: false},
-            {id: 9, name: "Juan", date: "2024-10-01", steps: 14200, proofUrl: null, paid: false},
-            {id: 10, name: "Ana", date: "2024-10-01", steps: 8100, proofUrl: null, paid: false},
-            {id: 11, name: "Luis", date: "2024-10-01", steps: 11500, proofUrl: null, paid: false},
-            {id: 12, name: "Maria", date: "2024-10-01", steps: 9100, proofUrl: null, paid: false}
-        ];
-        
-        this.submissions = sampleData;
-        this.nextId = Math.max(...sampleData.map(s => s.id)) + 1;
-    }
+  // Start with empty data - no sample entries
+const sampleData = [];
+
+if (!localStorage.getItem('stepsData')) {
+    this.submissions = [];
+    this.nextId = 1;
+    this.saveData();
+} else {
+    this.loadData();
+}
+
 
     bindEvents() {
         // Tab switching
