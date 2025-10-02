@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10K Steps Challenge Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>10K Steps Challenge Tracker</h1>
+            <p class="header-subtitle">Track your daily steps and stay accountable</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-tab="submit">Submit Steps</button>
+            <button class="tab-btn" data-tab="tracker">Daily Tracker</button>
+            <button class="tab-btn" data-tab="summary">Payment Summary</button>
+        </nav>
+
+        <!-- Tab Content -->
+        <main class="tab-content">
+            <!-- Submit Steps Tab -->
+            <section id="submit-tab" class="tab-panel active">
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Submit Your Daily Steps</h2>
+                    </div>
+                    <div class="card__body">
+                        <form id="steps-form">
+                            <div class="form-group">
+                                <label class="form-label" for="participant-name">Name</label>
+                                <select id="participant-name" class="form-control" required>
+                                    <option value="">Select participant</option>
+                                    <option value="Juan">Juan</option>
+                                    <option value="Maria">Maria</option>
+                                    <option value="Carlos">Carlos</option>
+                                    <option value="Ana">Ana</option>
+                                    <option value="Luis">Luis</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="step-date">Date</label>
+                                <input type="date" id="step-date" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="step-count">Step Count</label>
+                                <input type="number" id="step-count" class="form-control" min="0" placeholder="e.g., 10500" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="proof-upload">Proof Upload (Optional)</label>
+                                <input type="file" id="proof-upload" class="form-control" accept="image/*">
+                                <div id="image-preview" class="image-preview hidden"></div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn--primary btn--full-width">Submit Steps</button>
+                        </form>
+                        
+                        <div id="submit-message" class="submit-message hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Daily Tracker Tab -->
+            <section id="tracker-tab" class="tab-panel">
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Daily Step Submissions</h2>
+                        <div class="tracker-filters">
+                            <input type="text" id="search-filter" class="form-control" placeholder="Search by name...">
+                            <input type="date" id="date-from" class="form-control">
+                            <input type="date" id="date-to" class="form-control">
+                            <button id="clear-filters" class="btn btn--secondary">Clear</button>
+                        </div>
+                    </div>
+                    <div class="card__body">
+                        <div class="table-container">
+                            <table id="submissions-table" class="submissions-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Name</th>
+                                        <th>Steps</th>
+                                        <th>Status</th>
+                                        <th>Amount Owed</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="submissions-tbody">
+                                    <!-- Dynamic content -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="tracker-summary">
+                            <div class="summary-stats">
+                                <span class="stat-item">Total Entries: <strong id="total-entries">0</strong></span>
+                                <span class="stat-item">Missed Days: <strong id="total-missed">0</strong></span>
+                                <span class="stat-item">Total Owed: <strong>₱<span id="total-owed">0</span></strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Payment Summary Tab -->
+            <section id="summary-tab" class="tab-panel">
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Payment Summary</h2>
+                        <button id="export-data" class="btn btn--secondary">Export Data</button>
+                    </div>
+                    <div class="card__body">
+                        <div id="participant-summaries" class="participant-summaries">
+                            <!-- Dynamic content -->
+                        </div>
+                        
+                        <div class="grand-total">
+                            <h3>Grand Total: ₱<span id="grand-total-amount">0</span></h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
